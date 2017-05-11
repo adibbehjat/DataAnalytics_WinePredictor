@@ -11,7 +11,8 @@ The complete citation is as follows:
 ```
 Paulo Cortez, University of Minho, Guimarães, Portugal, http://www3.dsi.uminho.pt/pcortez
 
-A. Cerdeira, F. Almeida, T. Matos and J. Reis, Viticulture Commission of the Vinho Verde Region(CVRVV), Porto, Portugal 
+A. Cerdeira, F. Almeida, T. Matos and J. Reis, 
+Viticulture Commission of the Vinho Verde Region(CVRVV), Porto, Portugal 
 @2009
 
 ```
@@ -80,9 +81,9 @@ user_wine_data <- eval(parse(text = df))
 pred <- predict(wine.step,newdata=user_wine_data,interval="prediction",level=user_prediction_level)
 
 ```
-                    
-What's the output?
+
+## What's the output?
 The output generated from the model is an estimate of the wine's quality based on the past results collected from the data set. The wine quality measure is subjective, and simply provides a benchmark of the potential quality of the wine if it were to be tested by the same group of critics that examined the original wines that were collected in the database.
 
-How accurate is the model?
+## How accurate is the model?
 Based on R's data validation techniques, we've estimated that the potential error is at 65%
