@@ -1,0 +1,88 @@
+#page-content-wrapper {
+  color: white;
+}
+
+select {
+  color: black;
+}
+
+a {
+  color: yellow;
+  text-decoration: underline;
+  -moz-transition: color 0.5s; /* Safari */
+  -webkit-transition: color 0.5s; /* Safari */
+  transition: color 0.5s;
+}
+
+a:hover {
+  color: rgba(255,255,255,0.8);
+  text-decoration: underline;
+}
+
+#cheese-slider {
+  width: 150px;
+}
+
+#cheese-slider .slider-handle {
+  background: #03a9f4";
+}
+
+#barometer {
+  height: 504px; /* 500 + 2 x border size */
+  width: 22px;
+  border: 2px solid white;
+  margin: auto;
+  background: -moz-linear-gradient(90deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 64%, rgba(196,255,189,1) 100%); /* ff3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(196,255,189,1)), color-stop(36%, rgba(253,174,97,1)), color-stop(100%, rgba(215,25,28,1))); /* safari4+,chrome */
+  background: -webkit-linear-gradient(90deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 64%, rgba(196,255,189,1) 100%); /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(90deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 64%, rgba(196,255,189,1) 100%); /* opera 11.10+ */
+  background: -ms-linear-gradient(90deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 64%, rgba(196,255,189,1) 100%); /* ie10+ */
+  background: linear-gradient(0deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 64%, rgba(196,255,189,1) 100%); /* w3c */
+}
+
+#barometer span {
+  position: absolute;
+  display: block;
+  height: 20px;
+  text-align: left;
+  font-weight: bold;
+}
+
+#barometer span.fit {
+  left: 110px;
+}
+
+#barometer span.upper_b, #barometer span.lower_b{
+  left: 85px;
+}
+
+#barometer span:after, #barometer span:before {
+  content: " ";
+  position: absolute;
+}
+
+#barometer span:before {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 10px solid black;
+  left: 60px;
+  top: 30%;
+}
+
+#barometer span:after {
+  width: 25px;
+  border-bottom: 3px solid black;
+  display: block;
+  top: 50%;
+  left: 40px;
+}
+
+#barometer span.upper_b:before, #barometer span.lower_b:before {
+  left: 85px;
+}
+
+#barometer span.upper_b:after, #barometer span.lower_b:after {
+  left: 65px;
+}

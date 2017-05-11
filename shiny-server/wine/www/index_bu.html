@@ -1,0 +1,96 @@
+<html>
+
+<head>
+<title>Team Cheese</title>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="shared/jquery.js" type="text/javascript"></script>
+<script src="shared/shiny.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js" integrity="sha256-GcknncGKzlKm69d+sp+k3A2NyQE+jnu43aBl6rrDN2I=" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+
+<main class="main">
+  <aside class="sidebar">
+    <h1>Cheese</h1>
+    <h2>The wine quality analyst</h2>
+    <nav class="nav">
+      <ul>
+        <li class="active"><a href="/">Summary Data</a></li>
+        <li><a href="#">Wine Examiner</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <section>
+    <label><h1>Select Wine Type</h1></label>
+    <select name="winetype">
+      <option value="R">Red wine</option>
+      <option value="W">White wine</option>
+    </select>
+    <div id="graphContainer">
+      <h2>Wine Quality</h2>
+      <canvas id="wineChart" width="300" height="300"></canvas>
+    </div>
+    <pre id="summary" class="shiny-text-output"></pre>
+      
+    </div>
+  </section>
+</main>
+<div id="test" class="shiny-html-output"></div>
+</body>
+<script>
+
+// Default chart parameters
+Chart.defaults.global.responsive = false;
+Chart.defaults.global.defaultFontColor = "#FFFFFF";
+Chart.defaults.global.defaultFontFamily = "Open Sans";
+Chart.defaults.global.legend.position = "top";
+Chart.defaults.global.legend.fullWidth = false;
+Chart.defaults.global.legend.labels.boxWidth = 12;
+
+Shiny.addCustomMessageHandler("rserver",function(rdata) {
+  console.log(rdata);
+})
+
+Shiny.addCustomMessageHandler("piechart",function(rdata) {
+  
+  var rating = [];
+  var score = [];
+  var data = {};
+  var ctx = $("#wineChart");
+  
+  for (var i = 0; i < rdata.length; i++) {
+    rating.push(rdata[i]["rating"])
+    score.push(rdata[i]["score"])
+  }
+  
+  // Data to pass to doughnut graph
+  data = {
+    labels: rating,
+    datasets: [{
+      data: score,
+      backgroundColor: ['rgb(215,25,28)','rgb(253,174,97)','rgb(171,221,164)','rgb(43,131,186)'],
+      borderColor: '#FFF',
+      borderWidth: 1,
+    }]
+  };
+  
+  console.log(data)
+  
+  var wineChart = new Chart(ctx,{
+    type: 'doughnut',
+    data: data,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+    }
+  });
+  
+});
+
+</script>
+
+</html>

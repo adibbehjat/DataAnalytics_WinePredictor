@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cheese - The Wine Quality Tool</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+  
+    <!-- JavaScript tools -->
+    <script src="shared/jquery.js" type="text/javascript"></script>
+    <script src="shared/shiny.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js" integrity="sha256-GcknncGKzlKm69d+sp+k3A2NyQE+jnu43aBl6rrDN2I=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <h1>Cheese</h1>
+          <h2>The wine quality analyst</h2>
+          <nav class="nav">
+            <ul>
+              <li class="active"><a href="/wine">Summary Data</a></li>
+              <li><a href="/examiner">Wine Examiner</a></li>
+              <li><a href="/glossary">Glossary</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <label><h1>Select Wine Type</h1></label>
+                      <br />
+                      <select name="winetype">
+                        <option value="R">Red wine</option>
+                        <option value="W">White wine</option>
+                        <option value="all">Red and White wine</option>
+                      </select>
+                    </div>
+                </div> <!-- End row selection -->
+                <div class="row">
+                  <div class="col-lg-4 col-md-4">
+                    <div id="graphContainer">
+                      <h2>Wine Quality</h2>
+                      <canvas id="wineChart" width="300" height="300"></canvas>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8">
+                      <h2>Wine Selection Summary</h2>
+                      <div id="summary" class="shiny-html-output"></div>
+                  </div>
+                </div> <!-- End row selection -->
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    
+    <script>
+    // Default chart parameters
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.defaultFontColor = "#FFFFFF";
+    Chart.defaults.global.defaultFontFamily = "Open Sans";
+    Chart.defaults.global.legend.position = "top";
+    Chart.defaults.global.legend.fullWidth = false;
+    Chart.defaults.global.legend.labels.boxWidth = 12;
+    var wineChart;
+    var ctx = $("#wineChart");
+    
+    Shiny.addCustomMessageHandler("piechart",function(rdata) {
+      
+      var rating = [];
+      var score = [];
+      var data = {};
+      
+      // Clear old graph
+      if(wineChart) {
+        wineChart.destroy();
+      }
+      
+      for (var i = 0; i < rdata.length; i++) {
+        rating.push(rdata[i]["rating"])
+        score.push(rdata[i]["score"])
+      }
+      
+      // Data to pass to doughnut graph
+      data = {
+        labels: rating,
+        datasets: [{
+          data: score,
+          backgroundColor: ['rgb(215,25,28)','rgb(253,174,97)','rgb(171,221,164)'],
+          borderColor: '#FFF',
+          borderWidth: 1,
+        }]
+      };
+      
+      wineChart = new Chart(ctx,{
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+      });
+      
+    });
+    
+    </script>
+</body>
+</html>

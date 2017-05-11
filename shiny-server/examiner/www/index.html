@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cheese - The Wine Quality Analyst | Examiner</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="/wine/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.css" integrity="sha256-GictnRMRdToQvnQCNlxzk5MVOpwohHpovnn8Sece3Mo=" crossorigin="anonymous" />
+    <link href="examiner.css" rel="stylesheet">
+  
+    <!-- JavaScript tools -->
+    <script src="shared/jquery.js" type="text/javascript"></script>
+    <script src="shared/shiny.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js" integrity="sha256-GcknncGKzlKm69d+sp+k3A2NyQE+jnu43aBl6rrDN2I=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js" integrity="sha256-Gdq5BxoczjhbEJLjrYKQ4fvBGx/EQrTWjDM2UrdTot0=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <h1>Cheese</h1>
+          <h2>The wine quality analyst</h2>
+          <nav class="nav">
+            <ul>
+              <li><a href="/wine">Summary Data</a></li>
+              <li class="active"><a href="/examiner">Wine Examiner</a></li>
+              <li><a href="/glossary">Glossary</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                      <h1>Wine Examiner</h1>
+                      <p>Cheese's <i>Wine Examiner</i> provides chemists and wine growers with guidance and necessary parameters to analyze the chemical property of their wine and help them yield high quality rating.</p>
+                      <p>Please complete the form as best as possible. The data collected from these forms will be examined against a database of nearly 6,500 different wines. For questions in regards to the terms of the variables presented here, please visit Cheese's <a href="http://da-cheese.ddns.net/glossary">Glossary Page</a>.</p>
+                    </div>
+                </div> <!-- End row selection -->
+                <div class="row">
+                  <div class="col-lg-4 col-md-4">
+                    <h3>Wine Type</h3>
+                    <select name="winetype">
+                      <option value="R">Red wine</option>
+                      <option value="W">White wine</option>
+                    </select>
+                   </div>
+                   <div class="col-lg-4 col-md-4">
+                    <h3>Prediction Interval</h3>
+                    <select name="pred_inter">
+                      <option value="0.99">99%</option>
+                      <option value="0.95">95%</option>
+                      <option value="0.90">90%</option>
+                      <option value="0.75">75%</option>
+                    </select>
+                   </div>
+                </div> <!-- End row selection -->
+                <div class="row">
+                  <div class="col-lg-4 col-md-4">
+                    
+                    <h3>pH Level</h3>
+                    <input id="pH" type="text" data-slider-id="cheese-slider" data-slider-min="1.36" data-slider-max="6.02" data-slider-step="0.01" data-slider-value="3.22"/> <span id="ph_value_label">Value: <span id="ph_value">3.22</span></span>
+                    
+                    <hr style="border-top: dotted #ABABAB 1px;" />
+                    <h3>Fixed Acidity</h3> 
+                    <input id="fixed_acidity" type="text" data-slider-id="cheese-slider" data-slider-min="2.45" data-slider-max="23.85" data-slider-step="0.05" data-slider-value="8.30"/> <span id="fixed_acidity_value_label">Value: <span id="fixed_acidity_value">8.30</span></span>
+                    
+                    <hr style="border-top: dotted #ABABAB 1px;" />
+                    <h3>Volatile Acidity</h3>
+                    <input id="volatile_acidity" type="text" data-slider-id="cheese-slider" data-slider-min="0.04" data-slider-max="2.40" data-slider-step="0.01" data-slider-value="0.34"/> <span id="volatile_acidity_value_label">Value: <span id="volatile_acidity_value">0.34</span></span>
+                    
+                     <hr style="border-top: dotted #ABABAB 1px;" />
+                     <h3>Citric Acid</h3>
+                     <input id="citric_acid" type="text" data-slider-id="cheese-slider" data-slider-min="0" data-slider-max="2.50" data-slider-step="0.01" data-slider-value="0.32"/> <span id="citric_acid_value_label">Value: <span id="citric_acid_value">0.32</span></span>
+                     
+                     <hr style="border-top: dotted #ABABAB 1px;" />
+                     <h3>Chlorides</h3>
+                     <input id="chlorides" type="text" data-slider-id="cheese-slider" data-slider-min="0.01" data-slider-max="0.92" data-slider-step="0.01" data-slider-value="0.06"/> <span id="chlorides_value_label">Value: <span id="chlorides_value">0.06</span></span>
+                  
+                     <hr style="border-top: dotted #ABABAB 1px;" />
+                     <h3>Density</h3>
+                     <input id="density" type="text" data-slider-id="cheese-slider" data-slider-min="0.5" data-slider-max="1.5" data-slider-step="0.1" data-slider-value="1"/> <span id="density_value_label">Value: <span id="density_value">1</span></span>
+                     
+                </div> <!-- END OF FIRST COLUMN -->
+                
+                <div class="col-lg-4 col-md-4"> <!-- START OF SECOND COLUMN -->
+                  
+                  <h3>Residual Sugar</h3>
+                  <input id="residual_sugar" type="text" data-slider-id="cheese-slider" data-slider-min="0.45" data-slider-max="23.25" data-slider-step="0.01" data-slider-value="2.54"/> <span id="residual_sugar_value_label">Value: <span id="residual_sugar_value">5.5</span></span>
+                  <hr style="border-top: dotted #ABABAB 1px;" />
+                  <h3>Alcohol</h3>
+                  <input id="alcohol" type="text" data-slider-id="cheese-slider" data-slider-min="4.0" data-slider-max="22.4" data-slider-step="0.1" data-slider-value="10.5"/> <span id="alcohol_value_label">Value: <span id="alcohol_value">10.5</span></span>
+                  
+                  <hr style="border-top: dotted #ABABAB 1px;" />
+                  
+                  <h3>Total Sulfur Dioxide</h3>
+                  <input id="total_sulfur_dioxide" type="text" data-slider-id="cheese-slider" data-slider-min="0" data-slider-max="660" data-slider-step="1" data-slider-value="116"/>
+                  <span id="total_sulfur_dioxide_value_label">Value: <span id="total_sulfur_dioxide_value">116</span></span>
+                  
+                  <hr style="border-top: dotted #ABABAB 1px;" />
+                  
+                  <h3>Free Sulfur Dioxide</h3>
+                  <input id="free_sulfur_dioxide" type="text" data-slider-id="cheese-slider" data-slider-min="0" data-slider-max="435" data-slider-step="1" data-slider-value="31"/>
+                  <span id="free_sulfur_dioxide_value_label">Value: <span id="free_sulfur_dioxide_value">31</span></span>
+                  
+                  <hr style="border-top: dotted #ABABAB 1px;" />
+                  
+                  <h3>Sulphates</h3>
+                  <input id="sulphates" type="text" data-slider-id="cheese-slider" data-slider-min="0.11" data-slider-max="3.00" data-slider-step="0.01" data-slider-value="0.53"/>
+                  <span id="sulphates_value_label">Value: <span id="sulphates_value">0.53</span></span>
+                  
+                 </div>
+                 
+                 <!-- PREDICTOR OUTPUT -->
+                 <div id="pump_it" class="col-lg-4 col-md-4">
+                 <center><h3>Predicted Quality</h3></center>
+                  <div id="barometer">
+                    <span class ="upper_b"></span>
+                    <span class ="fit"></span>
+                    <span class ="lower_b"></span>
+                  </div>
+                 </div>
+                 <!-- END OF PREDICTOR OUTPUT -->
+                </div> <!-- End row selection -->
+            </div> <!-- End container fluid -->
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <script src="script.js"></script>
+    <script>
+    
+    // Convert the scales to fit the quality barometer
+    // in the HTML
+    function scaleConversion(data) {
+      
+      // Scale for Quality
+      var yMax = 10;
+      var yMin = 0;
+      
+      // Scale from site
+      // xMax -> Top of the div
+      // xMin -> Bottom of the div
+      var xMax = 0; 
+      var xMin = $('#barometer').height(); // pulled from CSS object
+      
+      // Create bucket
+      var output = [];
+      
+      // Loop through the collected rdata and do math
+      $.each(data, function(key, value){
+        
+        // Generate the percentage diff
+        var percent = (value - yMin) / (yMax - yMin);
+        
+        // Use percentage for new scale
+        output.push(percent * (xMax - xMin) + xMin);
+      })
+      
+      // Return the dataset
+      return output;
+      
+    }
+    
+    // Receive commands from shiny
+    Shiny.addCustomMessageHandler("quality_examiner",function(rdata) {
+        
+        // Just a handy reference of names
+        var names = ["pH","fixed.acidity","volatile.acidity","citric.acid","total.sulfur.dioxide","free.sulfur.dioxide","sulphates","chlorides","density","residual.sugar","alcohol"];
+        
+        // Collect the data from R
+        // The data from R will be an array of size 3
+        // The first number represents the predicted value, while the second
+        // and third number represent the lower and upper limit, respectively.
+        console.log(rdata);
+        
+        // Go through the output and make sure the information is within the
+        // range of Quality
+        $.each(rdata, function(key,value){
+          if (value > 10) {
+            rdata[key] = 10;
+          } else if(value < 0) {
+            rdata[key] = 0;
+          }
+        })
+        
+        // Convert, scale, collect
+        var predictions = scaleConversion(rdata);
+        
+        // Define the CSS for the predictors
+        // The math is basically the predictions value collected, minus
+        // half the height of the span. In essence, the 'center' of the
+        // span text will be the marker, versus the top of the span element.
+        
+        $("#barometer .upper_b").animate({'margin-top':predictions[2] - 10}, "easeout")
+        $("#barometer .fit").animate({'margin-top':predictions[0] - 10}, "easeout")
+        $("#barometer .lower_b").animate({'margin-top':predictions[1] - 10}, "easeout")
+        
+        $("#barometer .upper_b").text("UB: " + rdata[2].toFixed(2));
+        $("#barometer .fit").text(rdata[0].toFixed(2));
+        $("#barometer .lower_b").text("LB: " + rdata[1].toFixed(2));
+        
+    })
+    
+    </script>
+</body>

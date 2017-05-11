@@ -1,0 +1,31 @@
+h3 {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: bold;
+}
+
+.row {
+  font-size: 14px;
+  color: white;
+  padding-bottom: 0px;
+}
+
+.row h2 {
+  color: yellow;
+}
+
+.row a {
+  color: white;
+  text-decoration: underline;
+  -moz-transition: color 0.5s; /* Safari */
+  -webkit-transition: color 0.5s; /* Safari */
+  transition: color 0.5s;
+}
+
+.row a:hover {
+  color: rgba(255,255,255,0.8);
+  text-decoration: underline;
+}
+
+pre span {
+  color: green;
+}
