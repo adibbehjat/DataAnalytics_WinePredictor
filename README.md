@@ -86,4 +86,36 @@ pred <- predict(wine.step,newdata=user_wine_data,interval="prediction",level=use
 The output generated from the model is an estimate of the wine's quality based on the past results collected from the data set. The wine quality measure is subjective, and simply provides a benchmark of the potential quality of the wine if it were to be tested by the same group of critics that examined the original wines that were collected in the database.
 
 ## How accurate is the model?
-Based on R's data validation techniques, we've estimated that the potential error is at 65%
+Based on R's data validation techniques, we've estimated that the potential error is at 72.5% using a dynamic stepwise selection tool. The following code describes the data validation process:
+
+```splus
+# Capture needed set
+wine_sub <- wine_sub[,1:12]
+
+# Create the rating system
+wine_sub$rating <- ifelse(wine_sub$quality < 5, 'poor', ifelse(wine_sub$quality < 7, 'average', 'excellent'))
+
+# Assign the type for that column
+wine_sub$rating <- as.factor(wine_sub$rating)
+
+# Train using 75% of the full data
+train = sample(6497,nrow(wine_sub) * 0.75)
+
+# Create test and train
+wine_sub.train <- wine_sub[train,]
+wine_sub.test <- wine_sub[-train,]
+
+# Predict the data set given the subset
+wine.probs = predict(wine.step,wine_sub.test,type="response")
+
+# Categorize accordingly
+wine.pred = rep("poor",length(wine.probs))
+wine.pred[glm.probs>5]="average"
+wine.pred[glm.probs>7]="excellent"
+
+# Table between Predition and Test
+table(wine.pred, wine_sub.test$rating)
+
+# Success Rate
+mean(wine.pred == wine_sub.test$rating)
+```
