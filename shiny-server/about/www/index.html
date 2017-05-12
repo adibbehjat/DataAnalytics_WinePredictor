@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cheese - The Wine Quality Tool | Glossary</title>
+    <title>Cheese - The Wine Quality Tool | About</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -138,7 +138,38 @@ pred <- predict(wine.step,newdata=user_wine_data,interval="prediction",level=use
                 <div class="row">
                   <div class="col-lg-12">
                     <h2>How accurate is the model?</h2>
-                    <p>Based on R's data validation techniques, we've estimated that the potential error is at 65%</p>
+                    <p>Based on R's data validation techniques, we've estimated that the potential error is at 72.5% using a dynamic stepwise selection tool. The following code describes the data validation process:</p>
+                    <pre>
+<span># Capture needed set</span>
+wine_sub <- wine_sub[,1:12]
+
+<span># Create the rating system</span>
+wine_sub$rating <- ifelse(wine_sub$quality < 5, 'poor', ifelse(wine_sub$quality < 7, 'average', 'excellent'))
+
+<span># Assign the type for that column</span>
+wine_sub$rating <- as.factor(wine_sub$rating)
+
+<span># Train using 75% of the full data</span>
+train = sample(6497,nrow(wine_sub) * 0.75)
+
+<span># Create test and train</span>
+wine_sub.train <- wine_sub[train,]
+wine_sub.test <- wine_sub[-train,]
+
+<span># Predict the data set given the subset</span>
+wine.probs = predict(wine.step,wine_sub.test,type="response")
+
+<span># Categorize accordingly</span>
+wine.pred = rep("poor",length(wine.probs))
+wine.pred[glm.probs>5]="average"
+wine.pred[glm.probs>7]="excellent"
+
+<span># Table between Predition and Test</span>
+table(wine.pred, wine_sub.test$rating)
+
+<span># Success Rate</span>
+mean(wine.pred == wine_sub.test$rating)
+                    </pre>
                   </div>
                 </div> <!-- End row selection -->
             </div>
